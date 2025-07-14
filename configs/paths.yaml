@@ -1,0 +1,5 @@
+paths:
+  CONFIG_PATH: "configs/config.json"
+  TODAY_DATA_PATH: "data/today.json"
+  WEEK_DATA_PATH: "data/week.db"
+  ARCHIVE_DATA_PATH: "data/archive.db"

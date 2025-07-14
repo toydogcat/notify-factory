@@ -2,4 +2,7 @@ feedparser
 requests
 cryptography
 streamlit
+PyYAML
+hydra-core 
+omegaconf
 pytest
