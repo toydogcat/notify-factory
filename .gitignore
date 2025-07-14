@@ -212,3 +212,9 @@ __marimo__/
 demo/
 data/
 
+
+# uv env 
+.python-version
+pyproject.toml
+uv.lock
+
