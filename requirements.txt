@@ -5,4 +5,5 @@ streamlit
 PyYAML
 hydra-core 
 omegaconf
+python-dotenv
 pytest

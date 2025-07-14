@@ -1,35 +1,16 @@
-from util import load_config
+from util import *
+from tools_db import * 
 import os, json, sqlite3, feedparser, requests
 from datetime import datetime
-from encryptor import encrypt_content
+from encryptor import Master
 
-
-# === SQLite 更新 ===
-def insert_into_db(db_path, items):
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS messages (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        room TEXT,
-        source TEXT,
-        title TEXT,
-        content TEXT,
-        url TEXT,
-        timestamp TEXT
-    )''')
-    for room, sources in items.items():
-        for source, entries in sources.items():
-            for entry in entries:
-                c.execute("INSERT INTO messages (room, source, title, content, url, timestamp) VALUES (?, ?, ?, ?, ?, ?)",
-                          (room, source, entry["title"], entry["content"], entry.get("url", ""), entry["timestamp"]))
-    conn.commit()
-    conn.close()
 
 
 class Puppy:
     # class property
 
     def __init__(self):
+        self.master = Master()
         # instance property
         self.config   = load_config()
         self.paths    = self.config.paths
@@ -52,14 +33,8 @@ class Puppy:
             self.today_data = {"title": "My Data Source", "updated": "", "rooms": {"RSS": {}, "Info": {}, "Weather": {}}}
 
         # === RSS ===
-        for name, url in self.settings.get("rss", {}).items():
-            feed = feedparser.parse(url)
-            self.today_data["rooms"]["RSS"][name] = [{
-                "title": entry.get("title", ""),
-                "content": entry.get("summary", ""),
-                "url": entry.get("link", ""),
-                "timestamp": entry.get("published", datetime.now().isoformat())
-            } for entry in feed.entries[:5]]
+        capture_rss_info(ree_set = self.settings.rss, today_data = self.today_data)
+        
 
         # === Weather ===
         for city in self.settings.get("weather", []):
@@ -72,7 +47,7 @@ class Puppy:
         # === Info 加密（範例）===
         self.today_data["rooms"]["Info"]["PersonalNotes"] = [{
             "title": "提醒：喝水",
-            "content": encrypt_content("今天要多喝水"),
+            "content": self.master.encrypt_content("今天要多喝水"),
             "timestamp": datetime.now().isoformat(),
             "encrypted": True
         }]
@@ -89,28 +64,10 @@ class Puppy:
         archive_path = self.paths.ARCHIVE_DATA_PATH
         
         # 每週六歸檔
-        if datetime.now().weekday() == 5:
-            if os.path.exists(week_path):
-                conn_week = sqlite3.connect(week_path)
-                conn_archive = sqlite3.connect(archive_path)
-                conn_archive.execute('''CREATE TABLE IF NOT EXISTS messages (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    room TEXT,
-                    source TEXT,
-                    title TEXT,
-                    content TEXT,
-                    url TEXT,
-                    timestamp TEXT
-                )''')
-                for row in conn_week.execute("SELECT room, source, title, content, url, timestamp FROM messages"):
-                    conn_archive.execute("INSERT INTO messages (room, source, title, content, url, timestamp) VALUES (?, ?, ?, ?, ?, ?)", row)
-                conn_archive.commit()
-                conn_week.close()
-                conn_archive.close()
-                os.remove(week_path)
+        insert_into_db_archive(week_path, archive_path)
 
         # 寫入 week.db
-        insert_into_db(week_path, {"RSS": self.today_data["rooms"]["RSS"]})
+        insert_into_db_week(week_path, {"RSS": self.today_data["rooms"]["RSS"]})
 
 if __name__ == '__main__':
     puppy = Puppy()

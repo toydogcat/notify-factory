@@ -1,5 +1,5 @@
 import pytest
-from encryptor import encrypt_content, decrypt_content
+from secretary.encryptor import encrypt_content, decrypt_content
 
 def test_encryption_decryption():
     original = "測試訊息"

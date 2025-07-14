@@ -208,10 +208,9 @@ __marimo__/
 
 
 # for build
-
 demo/
 data/
-
+.env
 
 # uv env 
 .python-version
