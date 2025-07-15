@@ -220,6 +220,7 @@ data/
 #    for flutter 
 ###################
 flutter_web_hello/
+assets/
 
 
 # Flutter/Dart/Pub related
