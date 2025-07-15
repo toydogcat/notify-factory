@@ -26,8 +26,27 @@ uv run streamlit run secretary/streamlit_app.py
 ## env
 
 ```bash
+# install
 bash environment/flutter_install.sh
+
+# Test hello world case
+export PATH="$HOME/development/flutter/bin:$PATH"
+flutter doctor
+cd flutter_web_hello
+flutter run -d web-server
 ```
 
 ## run
 
+```bash
+cd factory_ui
+
+flutter build web
+flutter build apk
+flutter build appbundle
+
+flutter build macos    # macOS
+flutter build windows  # Windows
+flutter build linux    # Linux
+
+```
