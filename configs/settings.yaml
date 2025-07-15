@@ -1,8 +1,7 @@
 settings:
-  rss:
+  RSS:
     BBC: "http://feeds.bbci.co.uk/news/rss.xml"
-  weather: 
+  Info:
+    - "PersonalNotes"
+  Weather: 
     - "Taipei"
-
-
-    

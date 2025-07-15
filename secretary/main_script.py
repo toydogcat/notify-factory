@@ -43,16 +43,17 @@ class Puppy:
             self.today_data = {"title": "My Data Source", "updated": "", "rooms": {"RSS": {}, "Info": {}, "Weather": {}}}
 
         # === RSS ===
-        capture_rss_info(ree_set = self.settings.rss, today_data = self.today_data)
+        capture_rss_info(ree_set = self.settings.RSS, today_data = self.today_data)
         
 
         # === Weather ===
-        for city in self.settings.get("weather", []):
-            self.today_data["rooms"]["Weather"][city] = {
+        for city in self.settings.get("Weather", []):
+            self.today_data["rooms"]["Weather"][city] = [{
+                "title": "title",
                 "summary": "晴時多雲",
                 "temperature": "32°C",
                 "timestamp": datetime.now().isoformat()
-            }
+            }]
 
         # === Info 加密（範例）===
         self.today_data["rooms"]["Info"]["PersonalNotes"] = [{

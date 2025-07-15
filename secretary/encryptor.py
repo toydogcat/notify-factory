@@ -38,6 +38,12 @@ class Master:
         except Exception as e:
             logging.info(f'🔑 [解密失敗] 錯誤原因：{e}')
             return "[解密失敗]"
+        
+    def decrypt_content_by_key(self, token: str, key: bytes) -> str:
+        try:
+            return Fernet(key).decrypt(token.encode()).decode()
+        except Exception:
+            return "[解密失敗]"
     
 
 # def encrypt_content(content: str) -> str:
@@ -47,8 +53,4 @@ class Master:
 #     fernet = Fernet(key)
 #     return fernet.encrypt(content.encode()).decode()
 
-# def decrypt_content(token: str, key: bytes = KEY) -> str:
-#     try:
-#         return Fernet(key).decrypt(token.encode()).decode()
-#     except Exception:
-#         return "[解密失敗]"
+

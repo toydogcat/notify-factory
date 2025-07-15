@@ -14,4 +14,7 @@ uv run secretary/main_script.py
 uv run streamlit run secretary/streamlit_app.py
 ```
 
+# Bugs
+
+* yaml 直接設定有問題
 
