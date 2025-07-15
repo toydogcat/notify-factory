@@ -1,23 +1,33 @@
+import logging
 from util import *
 from tools_db import * 
 import os, json, sqlite3, feedparser, requests
 from datetime import datetime
 from encryptor import Master
 
-
+setup_logging()
 
 class Puppy:
     # class property
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
 
     def __init__(self):
-        self.master = Master()
         # instance property
+        self.master = Master()
         self.config   = load_config()
         self.paths    = self.config.paths
         self.settings = self.config.settings
+        logging.info(f'🖥️ setup configs')
 
+    def update_scripts(self):
         self.update_today_info()
         self.update_week_info()
+        logging.info(f'🖥️ run scripts')
 
 
     def update_today_info(self):
@@ -71,3 +81,4 @@ class Puppy:
 
 if __name__ == '__main__':
     puppy = Puppy()
+    puppy.update_scripts()

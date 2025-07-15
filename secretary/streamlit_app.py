@@ -1,8 +1,9 @@
 import streamlit as st
 import json
 from encryptor import Master
+from main_script import Puppy
 
-master = Master()
+puppy = Puppy()
 st.title("今日訊息編輯器")
 
 with open("data/today.json", "r", encoding="utf-8") as f:
@@ -17,7 +18,7 @@ for entry in entries:
     if entry.get("encrypted"):
         password = st.text_input("輸入密碼", type="password")
         if st.button("解密"):
-            decrypted = master.decrypt_content(entry["content"])
+            decrypted = puppy.master.decrypt_content(entry["content"])
             st.write(decrypted)
     else:
         st.write(entry["content"])
