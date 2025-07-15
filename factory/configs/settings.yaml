@@ -1,6 +1,7 @@
 settings:
   RSS:
     BBC: "http://feeds.bbci.co.uk/news/rss.xml"
+    IT_Home: "https://www.ithome.com/rss/"
   Info:
     - "PersonalNotes"
   Weather: 

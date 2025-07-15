@@ -214,6 +214,6 @@ data/
 
 # uv env 
 .python-version
-pyproject.toml
-uv.lock
 
+# for flutter 
+flutter_web_hello/
