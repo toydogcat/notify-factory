@@ -55,4 +55,35 @@ flutter run -d linux
 
 # run
 flutter run -d web-server
+
 ```
+
+# podman
+
+## ubuntu install
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y podman
+
+```
+
+## mac install
+
+```bash
+brew install podman
+podman machine init
+podman machine start
+
+```
+
+## check info
+
+```bash
+podman --version
+podman info
+
+```
+
+
