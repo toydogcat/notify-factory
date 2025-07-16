@@ -4,7 +4,7 @@ import '../widgets/decrypt_box.dart';
 class MessageView extends StatelessWidget {
   final List<dynamic> entries;
 
-  MessageView({required this.entries});
+  const MessageView({super.key, required this.entries});
 
   @override
   Widget build(BuildContext context) {

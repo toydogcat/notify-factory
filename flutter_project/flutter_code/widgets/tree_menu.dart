@@ -4,7 +4,7 @@ class TreeMenu extends StatelessWidget {
   final Map<String, dynamic> data;
   final Function(String, String) onSelect;
 
-  TreeMenu({required this.data, required this.onSelect});
+  const TreeMenu({super.key, required this.data, required this.onSelect});
 
   @override
   Widget build(BuildContext context) {

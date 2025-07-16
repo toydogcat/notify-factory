@@ -4,6 +4,8 @@ import '../widgets/message_view.dart';
 import '../services/data_loader.dart';
 
 class TodayPage extends StatefulWidget {
+  const TodayPage({super.key});
+
   @override
   _TodayPageState createState() => _TodayPageState();
 }
@@ -39,7 +41,7 @@ class _TodayPageState extends State<TodayPage> {
           flex: 2,
           child: Column(
             children: [
-              ElevatedButton(onPressed: refreshData, child: Text("重新整理")),
+              ElevatedButton(onPressed: refreshData, child: const Text("重新整理")),
               Expanded(
                 child: TreeMenu(
                   data: todayData['rooms'] ?? {},
