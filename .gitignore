@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-# lib/  flutter need it. 
+lib/ 
 lib64/
 parts/
 sdist/
@@ -221,6 +221,7 @@ data/
 ###################
 flutter_web_hello/
 assets/
+flutter_uiux/
 
 
 # Flutter/Dart/Pub related

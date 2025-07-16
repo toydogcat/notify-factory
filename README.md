@@ -49,4 +49,10 @@ flutter build macos    # macOS
 flutter build windows  # Windows
 flutter build linux    # Linux
 
+# tmp
+flutter run -d chrome
+flutter run -d linux
+
+# run
+flutter run -d web-server
 ```
