@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # === 可自訂變數 ===
+FACTORY="/workspaces/notify-factory"
 PROJECT_NAME="flutter_uiux"
-SOURCE_FOLDER="flutter_code"
-DATA_FOLDER="/workspaces/notify-factory/factory/data"
+SOURCE_FOLDER="$FACTORY/flutter_project/flutter_code"
+PUBSPEC_SOURCE="$FACTORY/flutter_project/pubspec.yaml"
+DATA_FOLDER="$FACTORY/factory/data"
 
 # === 自動推導路徑 ===
-ROOT_DIR="/workspaces/notify-factory"
-PROJECT_PATH="$ROOT_DIR/$PROJECT_NAME"
-SOURCE_PATH="$ROOT_DIR/$SOURCE_FOLDER"
+PROJECT_PATH="$FACTORY/$PROJECT_NAME"
 ASSETS_PATH="$PROJECT_PATH/assets"
 
 # === 建立 Flutter 專案 ===
@@ -21,9 +21,19 @@ rm -rf "$PROJECT_PATH/.git"
 rm -rf "$PROJECT_PATH/lib"
 
 # === 建立 lib 的軟連結 ===
-ln -sfn "$SOURCE_PATH" "$PROJECT_PATH/lib"
+ln -sfn "$SOURCE_FOLDER" "$PROJECT_PATH/lib"
+
+# === 移除 flutter_uiux/pubspec.yaml 並建立軟連結 ===
+rm -f "$PROJECT_PATH/pubspec.yaml"
+ln -sfn "$PUBSPEC_SOURCE" "$PROJECT_PATH/pubspec.yaml"
+
+# === 建立 assets 的軟連結 ===
+# mkdir -p "$ASSETS_PATH"
 ln -sfn "$DATA_FOLDER" "$ASSETS_PATH"
 
-echo "✅ Flutter 專案 '$PROJECT_NAME' 已建立並連結到 '$SOURCE_FOLDER'"
+# === 執行 flutter pub get ===
+cd "$PROJECT_PATH"
+flutter pub get
 
+echo "✅ Flutter 專案 '$PROJECT_NAME' 已建立並連結到 '$SOURCE_FOLDER'"
 

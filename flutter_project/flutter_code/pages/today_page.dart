@@ -22,7 +22,8 @@ class _TodayPageState extends State<TodayPage> {
   }
 
   void refreshData() async {
-    bool isNewDay = await checkIfNewDay();
+    // bool isNewDay = await checkIfNewDay();
+    bool isNewDay = false;
     if (isNewDay) {
       await updateWeekDb();
     }

@@ -1,4 +1,4 @@
-/// import 'package:encrypt/encrypt.dart' as enc;
+import 'package:encrypt/encrypt.dart' as enc;
 
 String decryptContent(String encryptedText, String password) {
   final key = enc.Key.fromUtf8(password.padRight(32, '0'));
