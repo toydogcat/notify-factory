@@ -11,11 +11,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Info System',
+
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         scaffoldBackgroundColor: Colors.blue[50], // 這裡設定背景色
       ),
+
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -34,6 +36,7 @@ class MyApp extends StatelessWidget {
           ), **/
         ),
       ),
+      
     );
   }
 }
